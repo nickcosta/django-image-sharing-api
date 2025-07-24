@@ -189,6 +189,30 @@
         ]
       }
     },
+        {
+      "name": "Unfollow User",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "{{base_url}}/social/unfollow/{{sample_user_id}}/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "social",
+            "unfollow",
+            "{{sample_user_id}}",
+            ""
+          ]
+        },
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token {{token}}"
+          }
+        ]
+      }
+    },
     {
       "name": "Like Post",
       "request": {
@@ -201,6 +225,30 @@
           "path": [
             "social",
             "like",
+            "{{sample_post_id}}",
+            ""
+          ]
+        },
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token {{token}}"
+          }
+        ]
+      }
+    },
+        {
+      "name": "Unlike Post",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "{{base_url}}/social/Unlike/{{sample_post_id}}/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "social",
+            "Unlike",
             "{{sample_post_id}}",
             ""
           ]
