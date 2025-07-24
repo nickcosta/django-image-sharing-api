@@ -1,0 +1,262 @@
+{
+  "info": {
+    "name": "Image Sharing API v2",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "034e7b64-754b-45bf-b822-68a27139a2be",
+    "description": "Includes helper GET requests for user & post IDs."
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000/api/v1"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "sample_user_id",
+      "value": "3"
+    },
+    {
+      "key": "sample_post_id",
+      "value": "7"
+    }
+  ],
+  "item": [
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "{{base_url}}/users/register/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "users",
+            "register",
+            ""
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"newuser\",\n  \"email\": \"new@example.com\",\n  \"password\": \"securepass123\",\n  \"password_confirm\": \"securepass123\",\n  \"first_name\": \"New\",\n  \"last_name\": \"User\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "{{base_url}}/users/login/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "users",
+            "login",
+            ""
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"newuser\",\n  \"password\": \"securepass123\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// capture token",
+              "const json = pm.response.json();",
+              "if (json.token) { pm.environment.set('token', json.token); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "List Users",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/users/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "users",
+            ""
+          ]
+        },
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token {{token}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Create Post",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "{{base_url}}/posts/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "posts",
+            ""
+          ]
+        },
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"caption\": \"My first post\",\n  \"image_url\": \"https://picsum.photos/400/400\"\n}"
+        }
+      }
+    },
+    {
+      "name": "List Posts",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/posts/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "posts",
+            ""
+          ]
+        },
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token {{token}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Follow User",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "{{base_url}}/social/follow/{{sample_user_id}}/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "social",
+            "follow",
+            "{{sample_user_id}}",
+            ""
+          ]
+        },
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token {{token}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Like Post",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "{{base_url}}/social/like/{{sample_post_id}}/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "social",
+            "like",
+            "{{sample_post_id}}",
+            ""
+          ]
+        },
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token {{token}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Personal Feed",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/posts/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "posts",
+            ""
+          ]
+        },
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token {{token}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Popular Posts (TODO)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/posts/popular/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "posts",
+            "popular",
+            ""
+          ]
+        },
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token {{token}}"
+          }
+        ]
+      }
+    }
+  ]
+}
